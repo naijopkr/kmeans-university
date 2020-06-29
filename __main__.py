@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 sns.set_style('darkgrid')
 
-df = pd.read_csv('./data/college_data.csv')
+df = pd.read_csv('./data/college_data.csv', index_col=0)
 df.head()
 df.info()
 df.describe()
@@ -32,13 +32,13 @@ hist_private(feature='Grad.Rate')
 df[df['Grad.Rate'] > 100] # Cazenovia College
 
 # Set Grad.Rate for 100 to make sense
-df.at[95, 'Grad.Rate'] = 100
-df.at[95, 'Grad.Rate']
+df.at['Cazenovia College', 'Grad.Rate'] = 100
+df.at['Cazenovia College', 'Grad.Rate']
 
 # K Means Cluster Creation
 from sklearn.cluster import KMeans
 
-X = df.drop(['Unnamed: 0', 'Private'], axis=1)
+X = df.drop('Private', axis=1)
 X.head()
 
 kmeans = KMeans(n_clusters=2)
